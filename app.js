@@ -1,10 +1,12 @@
-var express = require('express');
-var http = require('http');
-var app = express();
+let express = require('express');
+let http = require('http');
+let fs = require('fs');
+let bodyParser = require('body-parser');
+let app = express();
 
 if (app.get('env') === 'development') {
-  var browserSync = require('browser-sync');
-  var bs = browserSync.create();
+  let browserSync = require('browser-sync');
+  let bs = browserSync.create();
 
   bs.init({ logSnippet: false });
   bs.watch("public/**/*.*").on("change", bs.reload);
@@ -14,10 +16,41 @@ if (app.get('env') === 'development') {
 
 app.use(express.static('public'));
 app.get('/', function(req, res) {
-    res.sendfile('./public/index.html');
+  res.sendfile('./public/index.html');
 });
 
-var port = 3000;
+app.use(bodyParser.json());
+app.post('/save/image', (req, res) => {
+  savePng(req.body.img);
+  res.sendStatus(200);
+});
+
+// Save PNG
+function savePng(img) {
+  let data = img.replace(/^data:image\/\w+;base64,/, "");
+  let buffer = Buffer.from(data, 'base64');
+
+  let date = getLocalDate();
+  let dateString = formatDateString(date);
+
+  fs.writeFile(`output/${dateString}.png`, buffer, function(err, result) {
+     if(err) console.log('error', err);
+   });
+}
+
+// Date
+function getLocalDate() {
+  let d = new Date().getTime();
+  let offset = (new Date().getTimezoneOffset()) * -60 * 1000;
+  return date = new Date(d + offset);
+}
+
+function formatDateString(date) {
+  return date.toISOString().replace(/:/g, "-");
+}
+
+// Create Server
+let port = 3000;
 http.createServer(app).listen(port, function() {
   console.log('Listening on port ' + port + '...');
 });

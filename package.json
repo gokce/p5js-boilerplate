@@ -19,7 +19,8 @@
     "url": "https://github.com/gokce/p5js-boilerplate"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "body-parser": "^1.19.0"
   },
   "devDependencies": {
     "browser-sync": "^2.26.7",
