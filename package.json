@@ -1,0 +1,28 @@
+{
+  "name": "p5js-boilerplate",
+  "version": "0.0.1",
+  "description": "A very simple boilerplate to start coding p5.js locally with auto-reload.",
+  "keywords": [
+    "p5js",
+    "boilerplate",
+    "auto reload"
+  ],
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "gokce",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gokce/p5js-boilerplate"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "connect-browser-sync": "^2.1.0"
+  }
+}
