@@ -14,5 +14,5 @@ npm install -g browser-sync
 ## Run Browsersync
 Run browser-sync in the project folder. Whenever you modify and save a file in the project folder, browser will reload the page.
 ```
-browser-sync start --files "*"
+browser-sync start --server -f -w
 ```
