@@ -20,7 +20,8 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "body-parser": "^1.19.0"
+    "body-parser": "^1.19.0",
+    "dateformat": "^3.0.3"
   },
   "devDependencies": {
     "browser-sync": "^2.26.7",

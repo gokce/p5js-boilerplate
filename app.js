@@ -2,6 +2,8 @@ let express = require('express');
 let http = require('http');
 let fs = require('fs');
 let bodyParser = require('body-parser');
+let dateformat = require('dateformat');
+
 let app = express();
 
 if (app.get('env') === 'development') {
@@ -30,8 +32,7 @@ function savePng(img) {
   let data = img.replace(/^data:image\/\w+;base64,/, "");
   let buffer = Buffer.from(data, 'base64');
 
-  let date = getLocalDate();
-  let dateString = formatDateString(date);
+  let dateString = getDateString();
 
   fs.writeFile(`output/${dateString}.png`, buffer, function(err, result) {
      if(err) console.log('error', err);
@@ -39,14 +40,12 @@ function savePng(img) {
 }
 
 // Date
-function getLocalDate() {
+function getDateString() {
+  const dateFormat = 'yyyy-mm-dd-HH-MM-ss';
   let d = new Date().getTime();
   let offset = (new Date().getTimezoneOffset()) * -60 * 1000;
-  return date = new Date(d + offset);
-}
-
-function formatDateString(date) {
-  return date.toISOString().replace(/:/g, "-");
+  let date = new Date(d + offset);
+  return dateformat(new Date(), dateFormat);
 }
 
 // Create Server
