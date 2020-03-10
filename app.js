@@ -3,6 +3,7 @@ let http = require('http');
 let fs = require('fs');
 let bodyParser = require('body-parser');
 let dateformat = require('dateformat');
+let socket = require('socket.io');
 
 let app = express();
 
@@ -50,6 +51,21 @@ function getDateString() {
 
 // Create Server
 let port = 3000;
-http.createServer(app).listen(port, function() {
+let server = http.createServer(app).listen(port, function() {
   console.log('Listening on port ' + port + '...');
 });
+
+let io = socket(server);
+
+io.sockets.on('connection', newConnection);
+
+function newConnection(socket) {
+  console.log("New connection " + socket.id);
+
+  socket.on('mouse', mouseMessage);
+
+  function mouseMessage(data) {
+    socket.broadcast.emit('mouse', data);
+    //io.sockets.emit('mouse', data);
+  }
+}
