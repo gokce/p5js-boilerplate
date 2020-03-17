@@ -1,10 +1,11 @@
 let socket;
+let address = 'http://localhost:3000'
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(0);
 
-  socket = io.connect('http://localhost:3000');
+  socket = io();
   socket.on('mouse', incomingMouse);
 }
 
