@@ -25,7 +25,7 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^2.29.1",
     "connect-browser-sync": "^2.1.0"
   }
 }
